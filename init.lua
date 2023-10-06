@@ -83,7 +83,7 @@ function ShowColorScheme()
   Csn = Csn% #Colorschemes + 1
   vim.cmd.colorscheme(Colorschemes[Csn])
   Csn = (Csn - 2 + #Colorschemes)% #Colorschemes + 1
-  vim.o.background = "light"
+  vim.o.background = "dark"
   vim.cmd.colorscheme(Colorschemes[Csn])
   local timer = vim.loop.new_timer()
   timer:start(500, 0, vim.schedule_wrap(Start_up_func))
