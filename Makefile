@@ -1,7 +1,6 @@
 all: init.lua coc-settings.json
 	@git add -A
-	if time=$$(date +'%Y%m%d-%H%M%S') && git commit -m $$time; then echo needs update; else echo already up to date; fi
-	#git push origin main
+	if time=$$(date +'%Y%m%d-%H%M%S') && git commit -m $$time; then git push origin main; else echo already up to date; fi
 
 init:
 	git config user.email "********@yahoo.com"
