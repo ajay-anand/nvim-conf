@@ -8,9 +8,9 @@ init:
 
 
 init.lua: ~/.app/init.lua
-	@cp ~/.app/init.lua .
+	@cp $< .
 
 coc-settings.json: ~/.app/coc-settings.json
-	@cp ~/.app/coc-settings.json .
+	@cp $< .
 
 
