@@ -5,7 +5,7 @@ all: init.lua coc-settings.json
 	git push origin main
 
 init:
-	git config user.email "aanand_ub@yahoo.com"
+	git config user.email "********@yahoo.com"
 	git config user.name "Anand A."
 
 
