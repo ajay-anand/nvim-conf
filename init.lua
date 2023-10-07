@@ -1,5 +1,5 @@
 --[[
-Use Alt-l to switch from insert mode to normal mode
+Use Alt-l and stay mostly in normal mode.
 This configuration file provides the following additional key mappings:
 Alt-s         save file in insert mode or normal mode
 f             jump to a desired location on screen
@@ -15,6 +15,14 @@ gc            toggle comment
 <Space>tc     toggle between light and dark theme
 <Space>gd     jump to definition
 <Space>nw     show next warning or error
+
+Automatic tweaks:
+  Removes trailing spaces
+  Disables code folding
+  Opens help in new tab
+  Aligns search results to the center of screen
+  j and k wade smoothly through soft wrap
+  Use Ctrl-j and Ctrl-k move through hard lines
 --]]
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -126,9 +134,17 @@ vim.keymap.set({'n', 'v'}, 'f', '<cmd>HopWord<CR>', {noremap = true}) -- hop
 vim.keymap.set({'n', 'v'}, 't', '<C-f>M', {noremap = true}) -- next page
 
 -- not useful in general, not recommended
+function IndexOf(array, value)
+    for i, v in ipairs(array) do
+        if v == value then return i end
+    end
+    return nil
+end
 
 Colorschemes = vim.fn.getcompletion('', 'color')
-Csn = 1
+CsDark = IndexOf(Colorschemes, "onedark")
+CsLight = IndexOf(Colorschemes, "onenord")
+Csn = CsDark
 
 function Start_up_func()
   print(Colorschemes[Csn], '--', Csn)
@@ -149,10 +165,10 @@ end
 function ToggleColorScheme()
   if vim.o.background == 'dark' then
     vim.o.background = 'light'
-    Csn = 2
+    Csn = CsLight
   else
     vim.o.background = 'dark'
-    Csn = 1
+    Csn = CsDark
   end
   ShowColorScheme()
 end
