@@ -13,6 +13,7 @@ gc            toggle comment
 <Space>fb     file browser
 <Space>sc     show current colorscheme or use n-th colorscheme
 <Space>tc     toggle between light and dark theme
+<Space>gd     jump to definition
 <Space>nw     show next warning or error
 --]]
 
@@ -106,6 +107,7 @@ vim.wo.relativenumber = false
 
 vim.keymap.set('n', '<leader>X', '<cmd>bd!<CR>', {noremap = true}) --force close window
 vim.keymap.set('n', '<leader>fb', ':tabnew<CR>:Oil /home/ashoka<CR>', {}) --file browser
+vim.keymap.set('n', '<leader>gd', '<Plug>(coc-definition)', {noremap = true}) --go to definition
 vim.keymap.set('n', '<leader>nw', '<Plug>(coc-diagnostic-next)', {noremap = true}) --next warning
 vim.keymap.set('n', '<leader>sf', function() require('telescope.builtin').find_files({cwd='/home/ashoka',}) end, {noremap = true}) --search file
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, {}) --search help
