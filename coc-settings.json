@@ -1,6 +1,8 @@
 {
   "suggest.minTriggerInputLength": 4,
   "Lua.diagnostics.globals": ["vim"],
+  "Lua.workspace.checkThirdParty": false,
+  "Lua.workspace.maxPreload": 0,
   "python.linting.pylintEnabled": true,
   "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/16.0.2/clangd_16.0.2/bin/clangd",
 }
