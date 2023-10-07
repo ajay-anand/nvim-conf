@@ -1,3 +1,21 @@
+--[[
+Use Alt-l to switch from insert mode to normal mode
+This configuration file provides the following additional key mappings:
+Alt-s         save file in insert mode or normal mode
+f             jump to a desired location on screen
+t             next page
+,             previous page
+gc            toggle comment
+<Space>x      close window gracefully
+<Space>X      close window forced
+<Space>sf     search file
+<Space>sh     search help
+<Space>fb     file browser
+<Space>sc     show current colorscheme or use n-th colorscheme
+<Space>tc     toggle between light and dark theme
+<Space>nw     show next warning or error
+--]]
+
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', lazypath,})
@@ -15,10 +33,6 @@ require('lazy').setup({
   {'rmehri01/onenord.nvim'},
   {'neoclide/coc.nvim', branch = 'master', build = 'npm ci'},
   {'numToStr/Comment.nvim', opts = {}},
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  },
   {'nvim-telescope/telescope.nvim', dependencies = {'nvim-lua/plenary.nvim'}},
   {'nvim-treesitter/nvim-treesitter', dependencies = {'nvim-treesitter/nvim-treesitter-textobjects',}, build = ':TSUpdate',},
   {'phaazon/hop.nvim'},
