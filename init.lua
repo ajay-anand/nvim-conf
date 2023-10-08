@@ -26,9 +26,11 @@ vim.opt.rtp:prepend(lazypath)
 -- RECIPE
 -- vim +'redir >outfile' +'hi' +'redir END' +'q'
 -- :Inspect
--- :CocInstall coc-clangd coc-css coc-html coc-json coc-lua coc-pyright coc-rust-analyzer coc-tsserver
+-- :CocInstall coc-clangd coc-css coc-html coc-json coc-lua coc-pyright coc-rust-analyzer coc-tsserver coc-texlab
 -- Coc key bindings C-n C-p C-y C-e C-j C-k
--- apt install ripgrep #(for telescope and CoC)
+-- pip install pynvim --upgrade
+-- npm -g neovim tree-sitter tree-sitter-cli
+-- apt install ripgrep fd-find #(for telescope and CoC)
 
 require('lazy').setup({
   {'navarasu/onedark.nvim'},
@@ -48,7 +50,7 @@ require('nvim-treesitter.configs').setup {
   sync_install = false,
   auto_install = true,
   additional_vim_regex_highlighting = false,
-  use_languagetree = false,
+  use_languagetree = true,
   highlight = {
     enable=true,
     disable = function(_, buf) -- first arg is lang
@@ -82,7 +84,8 @@ vim.cmd([[cabbr h tab help]]) -- open help in new tab
 -- vim.cmd([[let g:coc_snippet_prev = '<c-k>']])
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
-vim.g.loaded_python3_provider = 0
+-- vim.g.loaded_python3_provider = 0
+vim.g.python3_host_prog = '/home/ashoka/.app/python/bin/python'
 vim.g.loaded_ruby_provider = 0
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -106,12 +109,14 @@ vim.opt.shell = '/usr/bin/fish'
 vim.wo.number = false
 vim.wo.relativenumber = false
 
-vim.keymap.set('n', '<leader>X', '<cmd>bd!<CR>', {noremap = true}) --force close window
 vim.keymap.set('n', '<leader>fb', ':tabnew<CR>:Oil /home/ashoka<CR>', {}) --file browser
 vim.keymap.set('n', '<leader>gd', '<Plug>(coc-definition)', {noremap = true}) --go to definition
 vim.keymap.set('n', '<leader>nw', '<Plug>(coc-diagnostic-next)', {noremap = true}) --next warning
+vim.keymap.set('n', '<leader>rn', '<Plug>(coc-rename)', {noremap = true}) --rename
 vim.keymap.set('n', '<leader>sf', function() require('telescope.builtin').find_files({cwd='/home/ashoka',}) end, {noremap = true}) --search file
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, {}) --search help
+vim.keymap.set('n', '<leader>sr', '<Plug>(coc-references)', {noremap = true}) --search references
+vim.keymap.set('n', '<leader>X', '<cmd>bd!<CR>', {noremap = true}) --force close window
 vim.keymap.set('n', '<leader>x', '<cmd>bd<CR>', {noremap = true}) --close window
 vim.keymap.set('n', 'N', 'Nzz', {noremap = true})
 vim.keymap.set('n', 'n', 'nzz', {noremap = true})
@@ -120,6 +125,11 @@ vim.keymap.set({'n', 'v'}, '<C-k>', 'k', {noremap = true})
 vim.keymap.set({'n', 'v'}, '<Space>', '<Nop>', {silent = true})
 vim.keymap.set({'n', 'v'}, 'j', "v:count == 0 ? 'gj' : 'j'", { noremap=true, expr = true, silent = true })
 vim.keymap.set({'n', 'v'}, 'k', "v:count == 0 ? 'gk' : 'k'", { noremap=true, expr = true, silent = true })
+vim.keymap.set({'n','v'}, '<leader>ca', '<Plug>(coc-codeaction)', {}) --format file
+vim.keymap.set({'o','x'}, 'ac', '<Plug>(coc-classobj-a)', {noremap=true})
+vim.keymap.set({'o','x'}, 'ac', '<Plug>(coc-classobj-a)', {noremap=true})
+vim.keymap.set({'o','x'}, 'if', '<Plug>(coc-funcobj-i)', {noremap=true})
+vim.keymap.set({'o','x'}, 'if', '<Plug>(coc-funcobj-i)', {noremap=true})
 
 vim.keymap.set({'i','n'}, '<M-s>', '<Esc><cmd>w<CR>', {silent=true, noremap = true}) --save file
 vim.keymap.set({'n', 'v'}, ',', '<C-b>M', {noremap = true}) -- previous page
