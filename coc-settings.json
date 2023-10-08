@@ -1,5 +1,4 @@
 {
-  "suggest.minTriggerInputLength": 4,
   "Lua.diagnostics.globals": ["vim"],
   "python.linting.pylintEnabled": true,
   "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/16.0.2/clangd_16.0.2/bin/clangd",
@@ -9,4 +8,13 @@
   "signature.enable": false,
   "Lua.workspace.checkThirdParty": false,
   "Lua.workspace.maxPreload": 1,
+  "Lua.completion.enable": true,
+  "suggest.minTriggerInputLength": 3,
+  "suggest.insertMode": "insert",
+  "suggest.filterGraceful": false,
+  "suggest.maxCompleteItemCount": 200000,
+  "suggest.timeout": 15000,
+  "suggest.localityBonus": false,
+  "list.smartCase": true,
+  "list.extendedSearchMode": false,
 }

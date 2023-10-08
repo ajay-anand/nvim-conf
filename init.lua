@@ -15,14 +15,6 @@ gc            toggle comment
 <Space>tc     toggle between light and dark theme
 <Space>gd     jump to definition
 <Space>nw     show next warning or error
-
-Automatic tweaks:
-  Removes trailing spaces
-  Disables code folding
-  Opens help in new tab
-  Aligns search results to the center of screen
-  j and k wade smoothly through soft wrap
-  Use Ctrl-j and Ctrl-k move through hard lines
 --]]
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -36,6 +28,7 @@ vim.opt.rtp:prepend(lazypath)
 -- :Inspect
 -- :CocInstall coc-clangd coc-css coc-html coc-json coc-lua coc-pyright coc-rust-analyzer coc-tsserver
 -- Coc key bindings C-n C-p C-y C-e C-j C-k
+-- apt install ripgrep #(for telescope and CoC)
 
 require('lazy').setup({
   {'navarasu/onedark.nvim'},
