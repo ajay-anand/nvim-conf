@@ -1,20 +1,30 @@
 --[[
 Use Alt-l and stay mostly in normal mode.
 This configuration file provides the following additional key mappings:
-Alt-s         save file in insert mode or normal mode
-f             jump to a desired location on screen
+
 t             next page
 ,             previous page
-gc            toggle comment
+f             jump to a desired location on screen
+Alt-s         save file in insert mode or normal mode
 <Space>x      close window gracefully
 <Space>X      close window forced
+:Q            forced quit all
+
+<Space>fb     file browser
 <Space>sf     search file
 <Space>sh     search help
-<Space>fb     file browser
+<Space>sr     search references
 <Space>sc     show current colorscheme or use n-th colorscheme
 <Space>tc     toggle between light and dark theme
+
+gc            toggle comment
+ic/ac         class object during selecton and deletion
+if/af         function object during selecton and deletion
+<Space>ca     code action
 <Space>gd     jump to definition
+<Space>rn     rename varaible
 <Space>nw     show next warning or error
+
 --]]
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -131,8 +141,8 @@ vim.keymap.set({'n', 'v'}, 'j', "v:count == 0 ? 'gj' : 'j'", { noremap=true, exp
 vim.keymap.set({'n', 'v'}, 'k', "v:count == 0 ? 'gk' : 'k'", { noremap=true, expr = true, silent = true })
 vim.keymap.set({'n','v'}, '<leader>ca', '<Plug>(coc-codeaction)', {}) --code action
 vim.keymap.set({'o','x'}, 'ac', '<Plug>(coc-classobj-a)', {noremap=true})
-vim.keymap.set({'o','x'}, 'ac', '<Plug>(coc-classobj-a)', {noremap=true})
-vim.keymap.set({'o','x'}, 'if', '<Plug>(coc-funcobj-i)', {noremap=true})
+vim.keymap.set({'o','x'}, 'af', '<Plug>(coc-funcobj-a)', {noremap=true})
+vim.keymap.set({'o','x'}, 'ic', '<Plug>(coc-classobj-i)', {noremap=true})
 vim.keymap.set({'o','x'}, 'if', '<Plug>(coc-funcobj-i)', {noremap=true})
 
 vim.keymap.set({'i','n'}, '<M-s>', '<Esc><cmd>w<CR>', {silent=true, noremap = true}) --save file
