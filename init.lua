@@ -27,9 +27,10 @@ vim.opt.rtp:prepend(lazypath)
 -- vim +'redir >outfile' +'hi' +'redir END' +'q'
 -- :Inspect
 -- :CocInstall coc-clangd coc-css coc-html coc-json coc-lua coc-pyright coc-rust-analyzer coc-tsserver coc-texlab
+-- :CocCommand clangd.install
 -- Coc key bindings C-n C-p C-y C-e C-j C-k
 -- pip install pynvim --upgrade
--- npm -g neovim tree-sitter tree-sitter-cli
+-- npm i -g neovim tree-sitter tree-sitter-cli
 -- apt install ripgrep fd-find #(for telescope and CoC)
 
 require('lazy').setup({
@@ -51,6 +52,7 @@ require('nvim-treesitter.configs').setup {
   auto_install = true,
   additional_vim_regex_highlighting = false,
   use_languagetree = true,
+  indent = {enable=true},
   highlight = {
     enable=true,
     disable = function(_, buf) -- first arg is lang
@@ -78,8 +80,10 @@ vim.api.nvim_create_autocmd({'BufWritePost' , 'BufEnter'}, {
 })
 
 vim.cmd([[ let g:python_recommended_style = 0 ]])
-vim.cmd([[au Filetype python setlocal ts=2 sts=0 sw=2]])
+vim.cmd([[au Filetype * setlocal ts=2 sts=0 sw=2]])
+vim.cmd([[au FileType * set formatoptions-=cro]])
 vim.cmd([[cabbr h tab help]]) -- open help in new tab
+vim.cmd([[cabbr Q qa!]]) -- open help in new tab
 -- vim.cmd([[let g:coc_snippet_next = '<c-j>']])
 -- vim.cmd([[let g:coc_snippet_prev = '<c-k>']])
 vim.g.loaded_node_provider = 0
@@ -125,7 +129,7 @@ vim.keymap.set({'n', 'v'}, '<C-k>', 'k', {noremap = true})
 vim.keymap.set({'n', 'v'}, '<Space>', '<Nop>', {silent = true})
 vim.keymap.set({'n', 'v'}, 'j', "v:count == 0 ? 'gj' : 'j'", { noremap=true, expr = true, silent = true })
 vim.keymap.set({'n', 'v'}, 'k', "v:count == 0 ? 'gk' : 'k'", { noremap=true, expr = true, silent = true })
-vim.keymap.set({'n','v'}, '<leader>ca', '<Plug>(coc-codeaction)', {}) --format file
+vim.keymap.set({'n','v'}, '<leader>ca', '<Plug>(coc-codeaction)', {}) --code action
 vim.keymap.set({'o','x'}, 'ac', '<Plug>(coc-classobj-a)', {noremap=true})
 vim.keymap.set({'o','x'}, 'ac', '<Plug>(coc-classobj-a)', {noremap=true})
 vim.keymap.set({'o','x'}, 'if', '<Plug>(coc-funcobj-i)', {noremap=true})
