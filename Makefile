@@ -3,7 +3,7 @@ all: init.lua coc-settings.json
 	@if time=$$(date +'%Y%m%d-%H%M%S') && git commit -m $$time; then git push origin main; fi
 
 init:
-	git config user.email "********@yahoo.com"
+	git config user.email "$(uid)@yahoo.com"
 	git config user.name "Anand A."
 
 
