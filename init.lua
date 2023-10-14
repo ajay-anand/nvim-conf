@@ -5,6 +5,7 @@ This configuration file provides the following additional key mappings:
 t             next page
 ,             previous page
 f             jump to a desired location on screen
+Alt-o         insert a line
 Alt-s         save file in insert mode or normal mode
 <Space>x      close window gracefully
 <Space>X      close window forced
@@ -62,7 +63,6 @@ require('nvim-treesitter.configs').setup {
   auto_install = true,
   additional_vim_regex_highlighting = false,
   use_languagetree = true,
-  indent = {enable=true},
   highlight = {
     enable=true,
     disable = function(_, buf) -- first arg is lang
@@ -145,6 +145,8 @@ vim.keymap.set({'o','x'}, 'af', '<Plug>(coc-funcobj-a)', {noremap=true})
 vim.keymap.set({'o','x'}, 'ic', '<Plug>(coc-classobj-i)', {noremap=true})
 vim.keymap.set({'o','x'}, 'if', '<Plug>(coc-funcobj-i)', {noremap=true})
 
+vim.keymap.set({'i'}, '<M-o>', "<Esc>o", {silent=true, noremap = true}) --insert a line
+vim.keymap.set({'n'}, '<M-o>', "moO<Esc>'o`o", {silent=true, noremap = true}) --insert a line
 vim.keymap.set({'i','n'}, '<M-s>', '<Esc><cmd>w<CR>', {silent=true, noremap = true}) --save file
 vim.keymap.set({'n', 'v'}, ',', '<C-b>M', {noremap = true}) -- previous page
 vim.keymap.set({'n', 'v'}, 'f', '<cmd>HopWord<CR>', {noremap = true}) -- hop
