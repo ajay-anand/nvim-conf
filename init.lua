@@ -51,10 +51,11 @@ require('lazy').setup({
   {'numToStr/Comment.nvim', opts = {}},
   {'nvim-telescope/telescope.nvim', dependencies = {'nvim-lua/plenary.nvim'}},
   {'nvim-treesitter/nvim-treesitter', dependencies = {'nvim-treesitter/nvim-treesitter-textobjects',}, build = ':TSUpdate',},
-  {'phaazon/hop.nvim'},
+  {'easymotion/vim-easymotion'},
+  -- {'phaazon/hop.nvim'},
   {'stevearc/oil.nvim', opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" },},
 })
-require'hop'.setup {keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5}
+-- require'hop'.setup {keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5}
 require('oil').setup()
 require('telescope').setup {pickers = {find_files = {mappings={i={['<CR>']=require('telescope.actions').file_tab}}}}}
 require('nvim-treesitter.configs').setup {
@@ -149,7 +150,7 @@ vim.keymap.set({'i'}, '<M-o>', "<Esc>o", {silent=true, noremap = true}) --insert
 vim.keymap.set({'n'}, '<M-o>', "moO<Esc>'o`o", {silent=true, noremap = true}) --insert a line
 vim.keymap.set({'i','n'}, '<M-s>', '<Esc><cmd>w<CR>', {silent=true, noremap = true}) --save file
 vim.keymap.set({'n', 'v'}, ',', '<C-b>M', {noremap = true}) -- previous page
-vim.keymap.set({'n', 'v'}, 'f', '<cmd>HopWord<CR>', {noremap = true}) -- hop
+vim.keymap.set({'n', 'v'}, 'f', '<Plug>(easymotion-bd-w)', {noremap = true}) -- hop <cmd>HopWord<CR>
 vim.keymap.set({'n', 'v'}, 't', '<C-f>M', {noremap = true}) -- next page
 
 -- not useful in general, not recommended
