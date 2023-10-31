@@ -54,6 +54,7 @@ require('lazy').setup({
   {'easymotion/vim-easymotion'},
   -- {'phaazon/hop.nvim'},
   {'stevearc/oil.nvim', opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" },},
+  -- {"nvim-tree/nvim-tree.lua", version = "*", lazy = false, config = function() require("nvim-tree").setup {} end,},
 })
 -- require'hop'.setup {keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5}
 require('oil').setup()
@@ -90,11 +91,17 @@ vim.api.nvim_create_autocmd({'BufWritePost' , 'BufEnter'}, {
   end
 })
 
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+-- vim.opt.termguicolors = true
+-- require("nvim-tree").setup()
+
 vim.cmd([[ let g:python_recommended_style = 0 ]])
 vim.cmd([[au Filetype * setlocal ts=2 sts=0 sw=2]])
 vim.cmd([[au FileType * set formatoptions-=cro]])
-vim.cmd([[cabbr h tab help]]) -- open help in new tab
-vim.cmd([[cabbr Q qa!]]) -- open help in new tab
+vim.cmd([[cabbr <expr> h getcmdtype()==':'? 'tab help' : 'h']]) -- open help in new tab
+vim.cmd([[cabbr <expr> q getcmdtype()==':'? 'qa' : 'q']]) -- close gracefully
+vim.cmd([[cabbr <expr> Q getcmdtype()==':'? 'qa!': 'Q']]) -- close forced
 -- vim.cmd([[let g:coc_snippet_next = '<c-j>']])
 -- vim.cmd([[let g:coc_snippet_prev = '<c-k>']])
 vim.g.loaded_node_provider = 0
@@ -128,9 +135,10 @@ vim.keymap.set('n', '<leader>fb', ':tabnew<CR>:Oil /home/ashoka<CR>', {}) --file
 vim.keymap.set('n', '<leader>gd', '<Plug>(coc-definition)', {noremap = true}) --go to definition
 vim.keymap.set('n', '<leader>nw', '<Plug>(coc-diagnostic-next)', {noremap = true}) --next warning
 vim.keymap.set('n', '<leader>rn', '<Plug>(coc-rename)', {noremap = true}) --rename
-vim.keymap.set('n', '<leader>sf', function() require('telescope.builtin').find_files({cwd='/home/ashoka',}) end, {noremap = true}) --search file
+vim.keymap.set('n', '<leader>sf', function() require('telescope.builtin').find_files({search_dirs={'/home/ashoka','/g'},}) end, {noremap = true}) --search file
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, {}) --search help
 vim.keymap.set('n', '<leader>sr', '<Plug>(coc-references)', {noremap = true}) --search references
+vim.keymap.set('n', '<leader>st', '<cmd>tabnew<CR><cmd>terminal<CR>', {noremap = true}) --search references
 vim.keymap.set('n', '<leader>X', '<cmd>bd!<CR>', {noremap = true}) --force close window
 vim.keymap.set('n', '<leader>x', '<cmd>bd<CR>', {noremap = true}) --close window
 vim.keymap.set('n', 'N', 'Nzz', {noremap = true})
