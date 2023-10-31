@@ -52,11 +52,8 @@ require('lazy').setup({
   {'nvim-telescope/telescope.nvim', dependencies = {'nvim-lua/plenary.nvim'}},
   {'nvim-treesitter/nvim-treesitter', dependencies = {'nvim-treesitter/nvim-treesitter-textobjects',}, build = ':TSUpdate',},
   {'easymotion/vim-easymotion'},
-  -- {'phaazon/hop.nvim'},
   {'stevearc/oil.nvim', opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" },},
-  -- {"nvim-tree/nvim-tree.lua", version = "*", lazy = false, config = function() require("nvim-tree").setup {} end,},
 })
--- require'hop'.setup {keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5}
 require('oil').setup()
 require('telescope').setup {pickers = {find_files = {mappings={i={['<CR>']=require('telescope.actions').file_tab}}}}}
 require('nvim-treesitter.configs').setup {
@@ -90,11 +87,6 @@ vim.api.nvim_create_autocmd({'BufWritePost' , 'BufEnter'}, {
     vim.diagnostic.config({signs = false})
   end
 })
-
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- vim.opt.termguicolors = true
--- require("nvim-tree").setup()
 
 vim.cmd([[ let g:python_recommended_style = 0 ]])
 vim.cmd([[au Filetype * setlocal ts=2 sts=0 sw=2]])
