@@ -11,4 +11,5 @@
   "Lua.completion.enable": true,
   "suggest.minTriggerInputLength": 3,
   "suggest.insertMode": "insert",
+  "semanticTokens.enable": true,
 }
