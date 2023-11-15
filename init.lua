@@ -24,7 +24,12 @@ require('lazy').setup({
 -- automatically remove extra spaces
 vim.api.nvim_create_autocmd({'BufWritePre'}, {
   pattern = {'*'},
-  command = [[%s/\s\+$//e]],
+  callback = function()
+  pcall(function() vim.cmd([[normal mq]]) end)
+  pcall(function() vim.cmd([[%s/\s\+$//e]]) end)
+  pcall(function() vim.cmd([[%s/\n\n\zs\n*]]) end)
+  pcall(function() vim.cmd([[normal `q]]) end)
+end
 })
 
 -- disable folding
@@ -38,7 +43,7 @@ vim.api.nvim_create_autocmd({'BufWritePost' , 'BufEnter'}, {
   end
 })
 
-vim.cmd([[ let g:python_recommended_style = 0 ]])
+vim.cmd([[let g:python_recommended_style = 0]])
 vim.cmd([[au Filetype * setlocal ts=2 sts=0 sw=2]])
 vim.cmd([[au FileType * set formatoptions-=cro]])
 vim.cmd([[cabbr <expr> h getcmdtype()==':'? 'tab help' : 'h']]) -- open help in new tab
@@ -58,6 +63,7 @@ vim.o.hlsearch = false
 vim.o.ignorecase = true
 vim.o.laststatus = 0 -- lualine
 vim.o.mouse = 'a'
+vim.o.ruler = false
 vim.o.shiftround = 2
 vim.o.shiftwidth = 2
 vim.o.showmode = true
@@ -118,4 +124,5 @@ vim.keymap.set({'o','x'}, 'ac', '<Plug>(coc-classobj-a)', {noremap=true})
 vim.keymap.set({'o','x'}, 'af', '<Plug>(coc-funcobj-a)', {noremap=true})
 vim.keymap.set({'o','x'}, 'ic', '<Plug>(coc-classobj-i)', {noremap=true})
 vim.keymap.set({'o','x'}, 'if', '<Plug>(coc-funcobj-i)', {noremap=true})
+
 
