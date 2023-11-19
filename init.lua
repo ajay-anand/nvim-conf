@@ -46,9 +46,6 @@ vim.api.nvim_create_autocmd({'BufWritePost' , 'BufEnter'}, {
 vim.cmd([[let g:python_recommended_style = 0]])
 vim.cmd([[au Filetype * setlocal ts=2 sts=0 sw=2]])
 vim.cmd([[au FileType * set formatoptions-=cro]])
-vim.cmd([[cabbr <expr> h getcmdtype()==':'? 'tab help' : 'h']]) -- open help in new tab
-vim.cmd([[cabbr <expr> q getcmdtype()==':'? 'qa' : 'q']]) -- close gracefully
-vim.cmd([[cabbr <expr> Q getcmdtype()==':'? 'qa!': 'Q']]) -- close forced
 vim.cmd.colorscheme('onedark')
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
@@ -99,7 +96,10 @@ end
 vim.keymap.set({'n','v'}, '<leader>a', '<Plug>(coc-codeaction)', {}) --code action
 vim.keymap.set('n', '<leader>c', ToggleColorScheme, {noremap = true}) -- toggle color
 vim.keymap.set('n', '<leader>d', '<Plug>(coc-definition)', {noremap = true}) --go to definition
+vim.keymap.set('n', '<leader>h', ':tab help ', {noremap = true}) --search file
 vim.keymap.set('n', '<leader>o', ':tabe ', {noremap = true}) --search file
+vim.keymap.set('n', '<leader>q', '<cmd>qa<CR>', {noremap = true}) --search file
+vim.keymap.set('n', '<leader>Q', '<cmd>qa!<CR>', {noremap = true}) --search file
 vim.keymap.set('n', '<leader>r', '<Plug>(coc-references)', {noremap = true}) --search references
 vim.keymap.set('n', '<leader>t', '<cmd>tabnew<CR><cmd>terminal<CR>a', {noremap = true}) --search references
 vim.keymap.set('n', '<leader>v', '<Plug>(coc-rename)', {noremap = true}) --rename
