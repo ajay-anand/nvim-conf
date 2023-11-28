@@ -99,7 +99,6 @@ vim.keymap.set('n', '<leader>d', '<Plug>(coc-definition)', {noremap = true}) --g
 vim.keymap.set('n', '<leader>h', ':tab help ', {noremap = true}) --search file
 vim.keymap.set('n', '<leader>o', ':tabe ', {noremap = true}) --search file
 vim.keymap.set('n', '<leader>q', '<cmd>qa<CR>', {noremap = true}) --search file
-vim.keymap.set('n', '<leader>Q', '<cmd>qa!<CR>', {noremap = true}) --search file
 vim.keymap.set('n', '<leader>r', '<Plug>(coc-references)', {noremap = true}) --search references
 vim.keymap.set('n', '<leader>t', '<cmd>tabnew<CR><cmd>terminal<CR>a', {noremap = true}) --search references
 vim.keymap.set('n', '<leader>v', '<Plug>(coc-rename)', {noremap = true}) --rename
