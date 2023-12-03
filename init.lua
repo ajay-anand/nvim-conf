@@ -26,8 +26,8 @@ vim.api.nvim_create_autocmd({'BufWritePre'}, {
   pattern = {'*'},
   callback = function()
   pcall(function() vim.cmd([[normal mq]]) end)
-  pcall(function() vim.cmd([[%s/\s\+$//e]]) end)
-  pcall(function() vim.cmd([[%s/\n\n\zs\n*]]) end)
+  vim.cmd([[%s/\s\+$//e]])
+  vim.cmd([[%s/\n\n\n\+/\r\r/e]])
   pcall(function() vim.cmd([[normal `q]]) end)
 end
 })
@@ -74,6 +74,30 @@ vim.opt.shell = '/usr/bin/fish'
 vim.wo.number = false
 vim.wo.relativenumber = false
 
+function AttachString()
+  local start = vim.fn.search('---', 'bW') + 1
+  local end1 = vim.fn.search('---', 'W')
+  if end1==0 then end1 = vim.fn.line('$') else end1 = end1-1 end
+  vim.print(start .. ' ' .. end1)
+  vim.cmd(start .. ',' .. end1 .. 's/$/' .. vim.fn.getreg('"') )
+  vim.cmd('norm ' .. start .. 'Gd' .. end1 .. 'G')
+end
+
+SpellCheckStatus = false
+FileType = 'plaintex'
+
+function ToggleSpellCheck()
+  if SpellCheckStatus == false then
+    vim.cmd('setlocal spell spelllang=en_us')
+    FileType = vim.o.filetype
+    vim.o.filetype = 'plaintex'
+  else
+    vim.o.filetype = FileType
+    vim.cmd('setlocal nospell')
+  end
+  SpellCheckStatus = not SpellCheckStatus
+end
+
 function ToggleColorScheme()
   if vim.o.background == 'dark' then
     vim.o.background = 'light'
@@ -84,44 +108,36 @@ function ToggleColorScheme()
   end
 end
 
-function AttachString()
-  local start = vim.fn.search('---', 'bW') + 1
-  local end1 = vim.fn.search('---', 'W')
-  if end1==0 then end1 = vim.fn.line('$') else end1 = end1-1 end
-  vim.print(start .. ' ' .. end1)
-  vim.cmd(start .. ',' .. end1 .. 's/$/' .. vim.fn.getreg('"') )
-  vim.cmd('norm ' .. start .. 'Gd' .. end1 .. 'G')
-end
-
-vim.keymap.set({'n','v'}, '<leader>a', '<Plug>(coc-codeaction)', {}) --code action
+vim.keymap.set('n', '<leader>a', '<Plug>(coc-codeaction)', {}) --code action
 vim.keymap.set('n', '<leader>c', ToggleColorScheme, {noremap = true}) -- toggle color
 vim.keymap.set('n', '<leader>d', '<Plug>(coc-definition)', {noremap = true}) --go to definition
+vim.keymap.set({'n', 'v'}, '<leader>f', '<Plug>(easymotion-bd-w)', {noremap = true}) -- easymotion
 vim.keymap.set('n', '<leader>h', ':tab help ', {noremap = true}) --search file
-vim.keymap.set('n', '<leader>o', ':tabe ', {noremap = true}) --search file
-vim.keymap.set('n', '<leader>q', '<cmd>qa<CR>', {noremap = true}) --search file
+vim.keymap.set('n', '<leader>n', '<cmd>tabnew<CR>', {noremap = true}) --new tab
+vim.keymap.set('n', '<leader>o', ':tabe ', {noremap = true}) --open file
+vim.keymap.set('n', '<leader>q', '<cmd>qa<CR>', {noremap = true}) --exit
 vim.keymap.set('n', '<leader>r', '<Plug>(coc-references)', {noremap = true}) --search references
+vim.keymap.set('n', '<leader>s', ToggleSpellCheck, {noremap = true}) -- check spelling
 vim.keymap.set('n', '<leader>t', '<cmd>tabnew<CR><cmd>terminal<CR>a', {noremap = true}) --search references
 vim.keymap.set('n', '<leader>v', '<Plug>(coc-rename)', {noremap = true}) --rename
 vim.keymap.set('n', '<leader>w', '<Plug>(coc-diagnostic-next)', {noremap = true}) --next warning
-vim.keymap.set('n', '<leader>X', '<cmd>bd!<CR>', {noremap = true}) --force close window
 vim.keymap.set('n', '<leader>x', '<cmd>bd<CR>', {noremap = true}) --close window
+vim.keymap.set('n', '<leader>X', '<cmd>bd!<CR>', {noremap = true}) --force close window
 vim.keymap.set('n', '<leader>y', AttachString, {noremap = true})
 vim.keymap.set('n', 'N', 'Nzz', {noremap = true})
 vim.keymap.set('n', 'n', 'nzz', {noremap = true})
 vim.keymap.set({'i','n'}, '<M-s>', '<Esc><cmd>w<CR>', {silent=true, noremap = true}) --save file
 vim.keymap.set({'i'}, '<M-o>', "<Esc>o", {silent=true, noremap = true}) --insert a line
-vim.keymap.set({'n', 'v'}, ',', '<C-b>M', {noremap = true}) -- previous page
+vim.keymap.set({'n', 'v'}, ',', 'gkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkg0', {noremap = true}) -- previous page <C-b>M
 vim.keymap.set({'n', 'v'}, '<C-j>', 'j', {noremap = true})
 vim.keymap.set({'n', 'v'}, '<C-k>', 'k', {noremap = true})
 vim.keymap.set({'n', 'v'}, '<Space>', '<Nop>', {silent = true})
-vim.keymap.set({'n', 'v'}, 'f', '<Plug>(easymotion-bd-w)', {noremap = true}) -- hop <cmd>HopWord<CR>
 vim.keymap.set({'n', 'v'}, 'j', "v:count == 0 ? 'gj' : 'j'", { noremap=true, expr = true, silent = true })
 vim.keymap.set({'n', 'v'}, 'k', "v:count == 0 ? 'gk' : 'k'", { noremap=true, expr = true, silent = true })
-vim.keymap.set({'n', 'v'}, 't', '<C-f>M', {noremap = true}) -- next page
+vim.keymap.set({'n', 'v'}, 't', 'gjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjg0', {noremap = true}) -- next page <C-f>M
 vim.keymap.set({'n'}, '<M-o>', "moO<Esc>'o`o", {silent=true, noremap = true}) --insert a line
 vim.keymap.set({'o','x'}, 'ac', '<Plug>(coc-classobj-a)', {noremap=true})
 vim.keymap.set({'o','x'}, 'af', '<Plug>(coc-funcobj-a)', {noremap=true})
 vim.keymap.set({'o','x'}, 'ic', '<Plug>(coc-classobj-i)', {noremap=true})
 vim.keymap.set({'o','x'}, 'if', '<Plug>(coc-funcobj-i)', {noremap=true})
-
 
