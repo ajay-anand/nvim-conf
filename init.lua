@@ -127,6 +127,7 @@ vim.keymap.set('n', '<leader>y', AttachString, {noremap = true})
 vim.keymap.set('n', 'N', 'Nzz', {noremap = true})
 vim.keymap.set('n', 'n', 'nzz', {noremap = true})
 vim.keymap.set({'i','n'}, '<M-s>', '<Esc><cmd>w<CR>', {silent=true, noremap = true}) --save file
+vim.keymap.set({'t'}, '<M-s>', '<C-\\><C-n>G', {silent=true, noremap = true}) --save file
 vim.keymap.set({'i'}, '<M-o>', "<Esc>o", {silent=true, noremap = true}) --insert a line
 vim.keymap.set({'n', 'v'}, ',', 'gkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkg0', {noremap = true}) -- previous page <C-b>M
 vim.keymap.set({'n', 'v'}, '<C-j>', 'j', {noremap = true})

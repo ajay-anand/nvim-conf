@@ -1,11 +1,12 @@
+git=/home/ashoka/.app/git/lib/git-core/git
+
 all: init.lua coc-settings.json
-	@git add -A
-	@if time=$$(date +'%Y%m%d-%H%M%S') && git commit -m $$time; then git push origin main; fi
+	$(git) add -A
+	@if time=$$(date +'%Y%m%d-%H%M%S') && $(git) commit -m $$time; then $(git) push origin main; fi
 
 init:
-	git config user.email "$(uid)@yahoo.com"
-	git config user.name "Anand A."
-
+	$(git) config user.email "$(uid)@yahoo.com"
+	$(git) config user.name "Anand A."
 
 init.lua: ~/.app/init.lua
 	@cp $< .
