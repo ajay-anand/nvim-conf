@@ -1,11 +1,8 @@
 -- RECIPE
 -- vim +'redir >outfile' +'hi' +'redir END' +'q'
 -- :Inspect
--- :CocInstall coc-clangd coc-css coc-html coc-json coc-lua coc-pyright coc-rust-analyzer coc-tsserver coc-texlab
--- :CocCommand clangd.install
 -- Coc key bindings C-n C-p C-y C-e C-j C-k
--- pip install pynvim --upgrade
--- npm i -g neovim tree-sitter tree-sitter-cli
+-- # pip install pynvim --upgrade
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -115,6 +112,7 @@ vim.keymap.set({'n', 'v'}, '<leader>f', '<Plug>(easymotion-bd-w)', {noremap = tr
 vim.keymap.set('n', '<leader>h', ':tab help ', {noremap = true}) --search file
 vim.keymap.set('n', '<leader>n', '<cmd>tabnew<CR>', {noremap = true}) --new tab
 vim.keymap.set('n', '<leader>o', ':tabe ', {noremap = true}) --open file
+vim.keymap.set('n', '<leader>p', 'V:diffput<CR>j', {noremap = true}) --search file
 vim.keymap.set('n', '<leader>q', '<cmd>qa<CR>', {noremap = true}) --exit
 vim.keymap.set('n', '<leader>r', '<Plug>(coc-references)', {noremap = true}) --search references
 vim.keymap.set('n', '<leader>s', ToggleSpellCheck, {noremap = true}) -- check spelling

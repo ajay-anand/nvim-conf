@@ -1,7 +1,7 @@
 {
   "Lua.diagnostics.globals": ["vim"],
   "python.linting.pylintEnabled": true,
-  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/16.0.2/clangd_16.0.2/bin/clangd",
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/17.0.3/clangd_17.0.3/bin/clangd",
   "diagnostic.enableSign": false,
   "clangd.disableCompletion": true,
   "pyright.disableCompletion": false,
